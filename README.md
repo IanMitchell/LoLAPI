@@ -4,6 +4,8 @@ A quick little Ruby wrapper for their recent [API](https://developer.riotgames.c
 
 Might not work, I haven't tested it that thoroughly yet (still very much being worked on).
 
+**Note:** *I'll be traveling until December 16, 2013. The repository won't see much work until then, but will be active after that!*
+
 ## Installation
 
 You should just be able to do
