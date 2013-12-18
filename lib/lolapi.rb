@@ -26,7 +26,7 @@ class LoLAPI
   end
 
   def self.summoner(name, region)
-    query '/api/lol/' + region + '/v1.1/summoner/by-name/' + name
+    query '/api/lol/' + region + '/v1.1/summoner/by-name/' + name.delete(' ')
   end
 
   def self.team(summoner_id, region)

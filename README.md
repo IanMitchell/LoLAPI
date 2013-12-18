@@ -27,7 +27,7 @@ This is my first gem however, so I may have mucked something up somewhere. Just 
 
 
 	puts 'Summoner:'
-	summoner = LoLAPI::summoner('Syniad', 'na')
+	summoner = LoLAPI::summoner('Sir Desch', 'na')
 	puts summoner
 
 	puts 'Game:'
@@ -39,6 +39,3 @@ This is my first gem however, so I may have mucked something up somewhere. Just 
 	puts 'Summary:'
 	summary = LoLAPI.summary(summoner['id'], 'na')
 	puts summary
-
-
-Syniad being my friend, not me. The API doesn't seem to play that well with spaces yet (My name is Sir Desch).
