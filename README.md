@@ -1,10 +1,6 @@
 # League of Legends API Wrapper
 
-A quick little Ruby wrapper for their recent [API](https://developer.riotgames.com)
-
-Might not work, I haven't tested it that thoroughly yet (still very much being worked on).
-
-**Note:** *I'll be traveling until December 16, 2013. The repository won't see much work until then, but will be active after that!*
+A quick little Ruby wrapper for their recent [API](https://developer.riotgames.com). Still very much being worked on, so be careful about using it in production.
 
 ## Installation
 
@@ -22,20 +18,25 @@ This is my first gem however, so I may have mucked something up somewhere. Just 
 	  config.api_key = 'KEY_HERE'
 	end
 
-	puts 'Champions:'
-	puts LoLAPI::champion('na')
+	puts "Champions:"
+	puts LoLAPI::get_champions 'na'
 
+	puts "Free Champions:"
+	puts LoLAPI::get_champions 'na', free: true
 
-	puts 'Summoner:'
-	summoner = LoLAPI::summoner('Sir Desch', 'na')
-	puts summoner
+	puts "Summoner by Name:"
+	puts LoLAPI::get_summoner_by_name 'Sir Desch', 'na'
 
-	puts 'Game:'
-	puts LoLAPI::game(summoner['id'], 'na')
+A full list of methods available:
 
-	puts 'League:'
-	puts LoLAPI::league(summoner['id'], 'na')
-
-	puts 'Summary:'
-	summary = LoLAPI.summary(summoner['id'], 'na')
-	puts summary
+	LoLAPI::get_champions(region, free: nil)
+	LoLAPI::get_game(summoner_id, region)
+	LoLAPI::get_league(summoner_id, region)
+	LoLAPI::get_summary(summoner_id, region, season: nil)
+	LoLAPI::get_ranked(summoner_id, region, season: nil)
+	LoLAPI::get_summoner_by_name(name, region)
+	LoLAPI::get_summoner_masteries(summoner_id, region)
+	LoLAPI::get_summoner_runes(summoner_id, region)
+	LoLAPI::get_summoner(summoner_id, region)
+	LoLAPI::get_summoner_name(summoner_id, region)
+	LoLAPI::get_team(summoner_id, region)

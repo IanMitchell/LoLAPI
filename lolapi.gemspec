@@ -1,11 +1,22 @@
-Gem::Specification.new do |s|
-  s.name        = 'lolapi'
-  s.version     = '0.0.2'
-  s.date        = '2013-12-10'
-  s.summary     = "A wrapper for the League of Legends API"
-  s.description = "A wrapper for the League of Legends API desc"
-  s.authors     = ["Ian Mitchell"]
-  s.email       = 'ian.mitchel1@live.com'
-  s.files       = ["lib/lolapi.rb", "lib/configuration.rb"]
-  s.homepage    = 'http://github.com/ianmitchell/lolapi'
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'LoLAPI/version'
+
+Gem::Specification.new do |spec|
+  spec.name          = 'lolapi'
+  spec.version       = LoLAPI::VERSION
+  spec.authors       = ["Ian Mitchell"]
+  spec.email         = ["ian.mitchel1@live.com"]
+  spec.summary       = "A wrapper for the League of Legends API"
+  spec.description   = "A wrapper for the League of Legends API desc"
+  spec.homepage      = 'http://github.com/ianmitchell/lolapi'
+  spec.license       = "MIT"
+
+  spec.files         = ['lib/lolapi.rb', 'lib/configuration.rb', 'lib/LoLAPI/version.rb']
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rake"
 end
