@@ -16,51 +16,110 @@ module LoLAPI
   end
 
   def self.get_game(summoner_id, region)
-    query '/api/lol/' + region + '/v1.1/game/by-summoner/' + summoner_id.to_s + '/recent'
+    query '/api/lol/' + region + '/v1.3/game/by-summoner/' + summoner_id.to_s + '/recent'
   end
 
-  def self.get_league(summoner_id, region)
-    query '/api/' + region + '/v2.1/league/by-summoner/' + summoner_id.to_s
+  def self.get_league(summoner_id: nil, region, entry: nil, type: nil)
+    if summoner_id.nil?
+      query '/api/' + region + '/v2.3/league/challenger', params: 'type=' + type.to_s
+    else
+      if entry.nil?
+        query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s
+      else
+        query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s + '/' + entry.to_s
+  end
+
+  def self.get_static_data(region, type, id: nil, locale: nil, version: nil, data: nil)
+    if id.nil?
+      if local.nil?
+        if version.nil?
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: data.to_s
+        else
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'version=' + version.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'version=' + version.to_s + ' ' + data.to_s
+      else
+        if version.nil?
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + data.to_s
+        else
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + ' version=' + version.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + ' version=' + version.to_s + ' ' + data.to_s
+    else
+      if local.nil?
+        if version.nil?
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'champData=' + data.to_s
+        else
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'version=' + version.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'version=' + version.to_s + ' ' + data.to_s
+      else
+        if version.nil?
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' ' + data.to_s
+        else
+          if data.nil?
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' version=' + version.to_s
+          else
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' version=' + version.to_s + ' ' + data.to_s
   end
 
   def self.get_summary(summoner_id, region, season: nil)
     if season.nil?
-      query '/api/lol/' + region + '/v1.1/stats/by-summoner/' + summoner_id.to_s + '/summary'
+      query '/api/lol/' + region + '/v1.2/stats/by-summoner/' + summoner_id.to_s + '/summary'
     else
-      query '/api/lol/' + region + '/v1.1/stats/by-summoner/' + summoner_id.to_s + '/summary', params: 'season=' + season
+      query '/api/lol/' + region + '/v1.2/stats/by-summoner/' + summoner_id.to_s + '/summary', params: 'season=' + season
     end
   end
 
   def self.get_ranked(summoner_id, region, season: nil)
     if season.nil?
-      query '/api/lol/' + region + '/v1.1/stats/by-summoner/' + summoner_id.to_s + '/ranked'
+      query '/api/lol/' + region + '/v1.2/stats/by-summoner/' + summoner_id.to_s + '/ranked'
     else
-      query '/api/lol/' + region + '/v1.1/stats/by-summoner/' + summoner_id.to_s + '/ranked', params: 'season=' + season
+      query '/api/lol/' + region + '/v1.2/stats/by-summoner/' + summoner_id.to_s + '/ranked', params: 'season=' + season
     end
   end
 
   def self.get_summoner_by_name(name, region)
-    query '/api/lol/' + region + '/v1.1/summoner/by-name/' + name.delete(' ')
+    query '/api/lol/' + region + '/v1.3/summoner/by-name/' + name.delete(' ')
   end
 
   def self.get_summoner_masteries(summoner_id, region)
-    query '/api/lol/' + region + '/v1.1/summoner/' + summoner_id.to_s + '/masteries'
+    query '/api/lol/' + region + '/v1.3/summoner/' + summoner_id.to_s + '/masteries'
   end
 
   def self.get_summoner_runes(summoner_id, region)
-    query '/api/lol/' + region + '/v1.1/summoner/' + summoner_id.to_s + '/runes'
+    query '/api/lol/' + region + '/v1.3/summoner/' + summoner_id.to_s + '/runes'
   end
 
   def self.get_summoner(summoner_id, region)
-    query '/api/lol/' + region + '/v1.1/summoner/' + summoner_id.to_s
+    query '/api/lol/' + region + '/v1.3/summoner/' + summoner_id.to_s
   end
 
   def self.get_summoner_name(summoner_id, region)
-    query '/api/lol/' + region + '/v1.1/summoner/' + summoner_id.to_s + '/name'
+    query '/api/lol/' + region + '/v1.3/summoner/' + summoner_id.to_s + '/name'
   end
 
-  def self.get_team(summoner_id, region)
-    query '/api/' + region + '/v2.1/team/by-summoner/' + summoner_id.to_s
+  def self.get_team_by_summoner(summoner_id, region)
+    query '/api/' + region + '/v2.2/team/by-summoner/' + summoner_id.to_s
+  end
+
+  def self.get_team(team_ids, region)
+    query '/api/lol/' + region + '/v2.2/team/' + team_ids.to_s
   end
 
   def self.query(uri, params: nil)
