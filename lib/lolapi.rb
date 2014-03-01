@@ -21,12 +21,12 @@ module LoLAPI
 
   def self.get_league(region, summoner_id: nil, entry: nil, type: nil)
     if summoner_id.nil?
-      query '/api/' + region + '/v2.3/league/challenger', params: 'type=' + type.to_s
+      query '/api/lol/' + region + '/v2.3/league/challenger', params: 'type=' + type.to_s
     else
       if entry.nil?
-        query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s
+        query '/api/lol/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s
       else
-        query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s + '/' + entry.to_s
+        query '/api/lol/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s + '/' + entry.to_s
       end
     end
   end
