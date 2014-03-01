@@ -29,14 +29,29 @@ This is my first gem however, so I may have mucked something up somewhere. Just 
 
 A full list of methods available:
 
+  Champions
 	LoLAPI::get_champions(region, free: nil)
+
+  Game
 	LoLAPI::get_game(summoner_id, region)
-	LoLAPI::get_league(summoner_id, region)
+
+  League
+   LoLAPI::get_league(summoner_id, region)
+
+  Static Data
+   LolAPI::get_static_data(region, type, id: nil, locale: nil, version: nil, data: nil)
+
+  Stats
 	LoLAPI::get_summary(summoner_id, region, season: nil)
 	LoLAPI::get_ranked(summoner_id, region, season: nil)
+
+  Summoner
 	LoLAPI::get_summoner_by_name(name, region)
 	LoLAPI::get_summoner_masteries(summoner_id, region)
 	LoLAPI::get_summoner_runes(summoner_id, region)
 	LoLAPI::get_summoner(summoner_id, region)
 	LoLAPI::get_summoner_name(summoner_id, region)
+
+  Team
 	LoLAPI::get_team(summoner_id, region)
+	LoLAPI::get_team_by_summoner(summoner_id, region)

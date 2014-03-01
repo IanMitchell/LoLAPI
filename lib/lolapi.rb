@@ -19,7 +19,7 @@ module LoLAPI
     query '/api/lol/' + region + '/v1.3/game/by-summoner/' + summoner_id.to_s + '/recent'
   end
 
-  def self.get_league(summoner_id: nil, region, entry: nil, type: nil)
+  def self.get_league(region, summoner_id: nil, entry: nil, type: nil)
     if summoner_id.nil?
       query '/api/' + region + '/v2.3/league/challenger', params: 'type=' + type.to_s
     else
@@ -27,55 +27,73 @@ module LoLAPI
         query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s
       else
         query '/api/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s + '/' + entry.to_s
+      end
+    end
   end
 
+  # data must be in the format EX: "champData=image" or "itemData=gold"
   def self.get_static_data(region, type, id: nil, locale: nil, version: nil, data: nil)
     if id.nil?
-      if local.nil?
+      if locale.nil?
         if version.nil?
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type
           else
             query '/api/lol/static-data/' + region + '/v1/' + type, params: data.to_s
+          end
         else
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type, params: 'version=' + version.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'version=' + version.to_s + ' ' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'version=' + version.to_s + '&' + data.to_s
+          end
+        end
       else
         if version.nil?
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + '&' + data.to_s
+          end
         else
           if data.nil?
-            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + ' version=' + version.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + '&version=' + version.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + ' version=' + version.to_s + ' ' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type, params: 'locale=' + locale.to_s + '&version=' + version.to_s + '&' + data.to_s
+          end
+        end
+      end
     else
-      if local.nil?
+      if locale.nil?
         if version.nil?
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'champData=' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: data.to_s
+          end
         else
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'version=' + version.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'version=' + version.to_s + ' ' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'version=' + version.to_s + '&' + data.to_s
+          end
+        end
       else
         if version.nil?
           if data.nil?
             query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' ' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + '&' + data.to_s
+          end
         else
           if data.nil?
-            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' version=' + version.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + '&version=' + version.to_s
           else
-            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + ' version=' + version.to_s + ' ' + data.to_s
+            query '/api/lol/static-data/' + region + '/v1/' + type + '/' + id.to_s, params: 'locale=' + locale.to_s + '&version=' + version.to_s + '&' + data.to_s
+          end
+        end
+      end
+    end
   end
 
   def self.get_summary(summoner_id, region, season: nil)
@@ -119,7 +137,7 @@ module LoLAPI
   end
 
   def self.get_team(team_ids, region)
-    query '/api/lol/' + region + '/v2.2/team/' + team_ids.to_s
+    query '/api/lol/' + region + '/v2.2/team/' + team_ids * ","
   end
 
   def self.query(uri, params: nil)
