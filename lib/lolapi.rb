@@ -7,11 +7,19 @@ module LoLAPI
 
   BASE_URL = 'http://prod.api.pvp.net'
 
-  def self.get_champions(champion_id, region, free: nil)
+  def self.get_champions(region, free: nil)
+    if free.nil?
+      query '/api/lol/' + region + '/v1.2/champion'
+    else
+      query '/api/lol/' + region + '/v1.2/champion', params: 'freeToPlay=' + free.to_s
+    end
+  end
+
+  def self.get_champions_by_id(champion_id, region, free: nil)
     if free.nil?
       query '/api/lol/' + region + '/v1.2/champion/' + champion_id.to_s
     else
-      query '/api/lol/' + region + '/v1.2/champion', params: 'freeToPlay=' + free.to_s
+      query '/api/lol/' + region + '/v1.2/champion/' + champion_id.to_s, params: 'freeToPlay=' + free.to_s
     end
   end
 

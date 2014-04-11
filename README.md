@@ -31,6 +31,7 @@ A full list of methods available:
 
   Champions
 	LoLAPI::get_champions(region, free: nil)
+   LoLAPI::get_champions_by_id(champion_id, region, free: nil)
 
   Game
 	LoLAPI::get_game(summoner_id, region)
