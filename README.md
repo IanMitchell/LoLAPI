@@ -36,7 +36,8 @@ A full list of methods available:
 	LoLAPI::get_game(summoner_id, region)
 
   League
-   LoLAPI::get_league(summoner_id, region)
+   LoLAPI::get_summoner_league(summoner_id, region, entry: false)
+   LoLAPI::get_team_league(team_id, region, entry: false)
 
   Static Data
    LolAPI::get_static_data(region, type, id: nil, locale: nil, version: nil, data: nil)
