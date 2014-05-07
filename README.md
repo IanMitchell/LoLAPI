@@ -29,29 +29,37 @@ This is my first gem however, so I may have mucked something up somewhere. Just 
 
 A full list of methods available:
 
-  	Champions
+	Champions
 	LoLAPI::get_champions(region, free: nil)
+	LoLAPI::get_champions_by_id(champion_id, region, free: nil)
 
 	Game
 	LoLAPI::get_game(summoner_id, region)
 
 	League
-   	LoLAPI::get_league(summoner_id, region)
+	LoLAPI::get_challenger(region, type)
+	LoLAPI::get_summoner_league(summoner_id, region, entry: false)
+	LoLAPI::get_team_league(team_id, region, entry: false)
 
-  	Static Data
-   	LoLAPI::get_static_data(region, type, id: nil, locale: nil, version: nil, data: nil)
-
-  	Stats
+	Static Data
+	LoLAPI::get_static_champions(region, id: nil, version: nil, locale: nil, data: nil, dataById: nil)
+	LoLAPI::get_static_items(region, id: nil, version: nil, locale: nil, data: nil)
+	LoLAPI::get_static_mastery(region, id: nil, version: nil, locale: nil, data: nil)
+	LoLAPI::get_static_realm(region)
+	LoLAPI::get_static_runes(region, id: nil, version: nil, locale: nil, data: nil)
+	LoLAPI::get_static_spells(region, id: nil, version: nil, locale: nil, data: nil, dataById: nil)
+	
+	Stats
 	LoLAPI::get_summary(summoner_id, region, season: nil)
 	LoLAPI::get_ranked(summoner_id, region, season: nil)
-
-  	Summoner
+	
+	Summoner
 	LoLAPI::get_summoner_by_name(name, region)
 	LoLAPI::get_summoner_masteries(summoner_id, region)
 	LoLAPI::get_summoner_runes(summoner_id, region)
 	LoLAPI::get_summoner(summoner_id, region)
 	LoLAPI::get_summoner_name(summoner_id, region)
-
-  	Team
+	
+	Team
 	LoLAPI::get_team(summoner_id, region)
 	LoLAPI::get_team_by_summoner(summoner_id, region)
