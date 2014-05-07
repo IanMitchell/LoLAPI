@@ -5,8 +5,8 @@ require 'LoLAPI/version'
 Gem::Specification.new do |spec|
   spec.name          = 'lolapi'
   spec.version       = LoLAPI::VERSION
-  spec.authors       = ["Ian Mitchell"]
-  spec.email         = ["ian.mitchel1@live.com"]
+  spec.authors       = ["Ian Mitchell", "Andy Tsao"]
+  spec.email         = ["ian.mitchel1@live.com", "tsao2@hotmail.com"]
   spec.summary       = "A wrapper for the League of Legends API"
   spec.description   = "A wrapper for the League of Legends API desc"
   spec.homepage      = 'http://github.com/ianmitchell/lolapi'
