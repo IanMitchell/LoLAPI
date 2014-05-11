@@ -172,7 +172,7 @@ module LoLAPI
     str = String.new
     str += 'locale=' + locale + '&' unless locale.nil?
     str += 'version=' + version + '&' unless version.nil?
-    str += 'dataById=' + dataById + '&' unless dataById == 'false'
+    str += 'dataById=' + dataById + '&' unless dataById.nil?
     return str
   end
 
