@@ -28,22 +28,22 @@ module LoLAPI
   end
 
   def self.get_challenger(region, type)
-    query '/api/lol/' + region + '/v2.3/league/challenger', params: 'type=' + type.to_s
+    query '/api/lol/' + region + '/v2.4/league/challenger', params: 'type=' + type.to_s
   end
 
   def self.get_summoner_league(summoner_id, region, entry: false)
     if entry
-      query '/api/lol/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s + '/entry'
+      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + summoner_id.to_s + '/entry'
     else
-      query '/api/lol/' + region + '/v2.3/league/by-summoner/' + summoner_id.to_s
+      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + summoner_id.to_s
     end
   end
 
   def self.get_team_league(team_id, region, entry: false)
     if entry
-      query '/api/lol/' + region + '/v2.3/league/by-team/' + team_id.to_s + '/entry'
+      query '/api/lol/' + region + '/v2.4/league/by-team/' + team_id.to_s + '/entry'
     else
-      query '/api/lol/' + region + '/v2.3/league/by-team/' + team_id.to_s
+      query '/api/lol/' + region + '/v2.4/league/by-team/' + team_id.to_s
     end
   end
 
@@ -143,14 +143,14 @@ module LoLAPI
   end
 
   def self.get_team_by_summoner(summoner_id, region)
-    query '/api/lol/' + region + '/v2.2/team/by-summoner/' + summoner_id.to_s
+    query '/api/lol/' + region + '/v2.3/team/by-summoner/' + summoner_id.to_s
   end
 
   def self.get_team(team_ids, region)
     if team_ids.class == Array
-      query '/api/lol/' + region + '/v2.2/team/' + team_ids * ","
+      query '/api/lol/' + region + '/v2.3/team/' + team_ids * ","
     else
-      query '/api/lol/' + region + '/v2.2/team/' + team_ids.to_s
+      query '/api/lol/' + region + '/v2.3/team/' + team_ids.to_s
     end
   end
 
