@@ -36,7 +36,7 @@ A full list of methods available:
 	Game
 	LoLAPI::get_game(summoner_id, region)
 
-	League
+	League (team_id, summoner_id can be an array of id's)
 	LoLAPI::get_challenger(region, type)
 	LoLAPI::get_summoner_league(summoner_id, region, entry: false)
 	LoLAPI::get_team_league(team_id, region, entry: false)
@@ -48,18 +48,18 @@ A full list of methods available:
 	LoLAPI::get_static_realm(region)
 	LoLAPI::get_static_runes(region, id: nil, version: nil, locale: nil, data: nil)
 	LoLAPI::get_static_spells(region, id: nil, version: nil, locale: nil, data: nil, dataById: nil)
-	
+
 	Stats
 	LoLAPI::get_summary(summoner_id, region, season: nil)
 	LoLAPI::get_ranked(summoner_id, region, season: nil)
-	
+
 	Summoner
 	LoLAPI::get_summoner_by_name(name, region)
 	LoLAPI::get_summoner_masteries(summoner_id, region)
 	LoLAPI::get_summoner_runes(summoner_id, region)
 	LoLAPI::get_summoner(summoner_id, region)
 	LoLAPI::get_summoner_name(summoner_id, region)
-	
-	Team
-	LoLAPI::get_team(summoner_id, region)
+
+	Team (team_id, summoner_id can be an array of ids)
+	LoLAPI::get_team(team_id, region)
 	LoLAPI::get_team_by_summoner(summoner_id, region)
