@@ -32,18 +32,20 @@ module LoLAPI
   end
 
   def self.get_summoner_league(summoner_id, region, entry: false)
+    str = parse_id_array summoner_id
     if entry
-      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + summoner_id.to_s + '/entry'
+      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + str + '/entry'
     else
-      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + summoner_id.to_s
+      query '/api/lol/' + region + '/v2.4/league/by-summoner/' + str
     end
   end
 
   def self.get_team_league(team_id, region, entry: false)
+    str = parse_id_array team_id
     if entry
-      query '/api/lol/' + region + '/v2.4/league/by-team/' + team_id.to_s + '/entry'
+      query '/api/lol/' + region + '/v2.4/league/by-team/' + str + '/entry'
     else
-      query '/api/lol/' + region + '/v2.4/league/by-team/' + team_id.to_s
+      query '/api/lol/' + region + '/v2.4/league/by-team/' + str
     end
   end
 
@@ -59,23 +61,25 @@ module LoLAPI
   end
 
   def self.get_static_items(region, id: nil, version: nil, locale: nil, data: nil)
-    str = create_params locale, version, 'false'
-    str += 'itemData=' + data + '&' unless data.nil?
+    str = create_params locale, version, data
 
     if id.nil?
+      str += 'itemListData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/item', params: str
     else
+      str += 'itemData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/item/' + id.to_s, params: str
     end
   end
 
   def self.get_static_mastery(region, id: nil, version: nil, locale: nil, data: nil)
-    str = create_params locale, version, 'false'
-    str += 'masteryData=' + data + '&' unless data.nil?
+    str = create_params locale, version, data
 
     if id.nil?
+      str += 'masteryListData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/mastery', params: str
     else
+      str += 'masteryData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/mastery/' + id.to_s, params: str
     end
   end
@@ -85,12 +89,13 @@ module LoLAPI
   end
 
   def self.get_static_runes(region, id: nil, version: nil, locale: nil, data: nil)
-    str = create_params locale, version, 'false'
-    str += 'runeData=' + data + '&' unless data.nil?
+    str = create_params locale, version, data
 
     if id.nil?
+      str += 'runeListData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/rune', params: str
     else
+      str += 'runeData=' + data + '&' unless data.nil?
       query '/api/lol/static-data/' + region + '/v1.2/rune/' + id.to_s, params: str
     end
   end
@@ -143,15 +148,13 @@ module LoLAPI
   end
 
   def self.get_team_by_summoner(summoner_id, region)
-    query '/api/lol/' + region + '/v2.3/team/by-summoner/' + summoner_id.to_s
+    str = parse_id_array summoner_id
+    query '/api/lol/' + region + '/v2.3/team/by-summoner/' + str
   end
 
   def self.get_team(team_ids, region)
-    if team_ids.class == Array
-      query '/api/lol/' + region + '/v2.3/team/' + team_ids * ","
-    else
-      query '/api/lol/' + region + '/v2.3/team/' + team_ids.to_s
-    end
+    str = parse_id_array team_ids
+    query '/api/lol/' + region + '/v2.3/team/' + str
   end
 
   def self.query(uri, params: nil)
@@ -172,8 +175,12 @@ module LoLAPI
     str = String.new
     str += 'locale=' + locale + '&' unless locale.nil?
     str += 'version=' + version + '&' unless version.nil?
-    str += 'dataById=' + dataById + '&' unless dataById == 'false'
+    str += 'dataById=' + dataById + '&' unless dataById.nil?
     return str
+  end
+
+  def self.parse_id_array(arr)
+    arr.class == Array ? arr * ',' : arr.to_s
   end
 
   def self.check_key
