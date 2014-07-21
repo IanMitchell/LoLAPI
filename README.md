@@ -1,6 +1,6 @@
 # League of Legends API Wrapper
 
-A quick little Ruby wrapper for their recent [API](https://developer.riotgames.com). Still very much being worked on, so be careful about using it in production.
+A quick little Ruby wrapper for their recent [API](https://developer.riotgames.com). This gem is no longer under active development, and is probably no longer compliant with the API. 
 
 ## Installation
 
